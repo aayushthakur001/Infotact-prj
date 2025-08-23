@@ -1,0 +1,17 @@
+# ICMP sanity
+alert icmp any any -> $HOME_NET any (msg:"ICMP test"; sid:1000000; rev:1;)
+
+# Nmap scans
+alert tcp any any -> $HOME_NET any (msg:"Nmap SYN Scan"; flags:S; flow:stateless; sid:1000001; rev:1;)
+alert tcp any any -> $HOME_NET any (msg:"Nmap FIN Scan"; flags:F; flow:stateless; sid:1000002; rev:1;)
+alert tcp any any -> $HOME_NET any (msg:"Nmap Xmas Scan"; flags:FPU; flow:stateless; sid:1000003; rev:1;)
+
+# SSH brute-force
+alert tcp any any -> $HOME_NET 22 (msg:"SSH Brute-Force Attempt Detected"; flow:to_server,established; detection_filter:track by_src, count 5, seconds 60; sid:1000004; rev:1;)
+
+# FTP brute-force (optional)
+alert tcp any any -> $HOME_NET 21 (msg:"FTP Brute-Force Attempt Detected"; flow:to_server,established; detection_filter:track by_src, count 5, seconds 60; sid:1000005; rev:1;)
+
+# C2 beacon (HTTP)
+alert tcp any any -> $HOME_NET 80 (msg:"Malware C2 HTTP Host detected"; flow:to_server,established; content:"Host|3a 20|malicious-c2-server.com"; http_header; sid:1000006; rev:1;)
+alert tcp any any -> $HOME_NET 80 (msg:"Malware C2 Beacon URI detected"; flow:to_server,established; content:"/ping"; http_uri; sid:1000007; rev:1;)
