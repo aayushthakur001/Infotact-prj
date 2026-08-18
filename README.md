@@ -1,5 +1,4 @@
-# Infotact-project's
-# 🚀 Project 1 — Network Intrusion Detection System (NIDS)
+# 🚀 Project — Network Intrusion Detection System (NIDS)
 
 This repository contains a **complete PoC** for deploying a **Snort-based Network Intrusion Detection System (NIDS)** as part of the cybersecurity internship project.  
 It demonstrates how to detect different types of network intrusions using custom Snort rules, along with full documentation and presentation.
